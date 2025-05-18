@@ -1,32 +1,30 @@
-package com.jhkim593.concurrency.redis;
+package com.jhkim593.example.redis;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
-public class RedisRepository3 {
+public class CouponRepository {
     private final RedisTemplate redisTemplate;
-    private String couponKey = "coupon";
-    private String couponLimit = "1000";
-    private String couponUserKey = "user";
+    private static final String couponKey = "coupon";
+    private static final String couponLimit = "3000";
 
-    @Getter
-    private Map<String ,String> map = new HashMap<>();
-    public void test(String userId){
-        Boolean execute = (Boolean)redisTemplate.execute(countAndAddValue(), Collections.singletonList(couponKey), userId, couponLimit);
-        if(execute) map.put(userId,"");
-
+    public Boolean createCoupon(String userId){
+        return (Boolean) redisTemplate.execute(getCountAndAddValue(), Collections.singletonList(couponKey), userId, couponLimit);
+    }
+    public Long size(){
+        return redisTemplate.opsForSet().size(couponKey);
+    }
+    public Boolean delete(){
+        return redisTemplate.delete(couponKey);
     }
 
-    public RedisScript<Boolean> countAndAddValue() {
+    public RedisScript<Boolean> getCountAndAddValue() {
         String script =
                 "local key = KEYS[1] \n" +
                 "local value = ARGV[1]\n" +
@@ -43,7 +41,6 @@ public class RedisRepository3 {
                 "else\n" +
                 "    return 0\n" +
                 "end\n";
-
         return RedisScript.of(script, Boolean.class);
     }
 }

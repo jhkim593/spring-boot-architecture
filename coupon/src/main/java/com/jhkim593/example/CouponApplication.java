@@ -1,13 +1,12 @@
-package com.jhkim593.concurrency;
+package com.jhkim593.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConcurrencyApplication {
-
+public class CouponApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ConcurrencyApplication.class, args);
+        SpringApplication.run(CouponApplication.class, args);
     }
 
 }

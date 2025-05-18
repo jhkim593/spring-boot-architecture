@@ -1,10 +1,10 @@
-package com.jhkim593.concurrency;
+package com.jhkim593.example;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConcurrencyApplicationTests {
+class CouponApplicationTests {
     @Test
     void contextLoads() {
     }
