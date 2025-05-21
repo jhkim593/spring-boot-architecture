@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class CouponTest {
     @Autowired
-    RedisTemplate redisTemplate;
-    @Autowired
     CouponRepository couponRepository;
 
     @AfterEach

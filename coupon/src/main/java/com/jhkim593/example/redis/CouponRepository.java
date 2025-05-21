@@ -24,7 +24,7 @@ public class CouponRepository {
         return redisTemplate.delete(couponKey);
     }
 
-    public RedisScript<Boolean> getCountAndAddValue() {
+    private RedisScript<Boolean> getCountAndAddValue() {
         String script =
                 "local key = KEYS[1] \n" +
                 "local value = ARGV[1]\n" +
